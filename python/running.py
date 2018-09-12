@@ -12,10 +12,10 @@ p = GPIO.PWM(servoPIN, 50) # GPIO 17 for PWM with 50Hz
 p.start(0) # Initialization
 try:
   while True:
-  	for dc in range(0, 50, 5):
+  	for dc in range(0, 100, 5):
   		p.ChangeDutyCycle(dc)
   		time.sleep(0.05)
-  	for dc in range(50, -1, -5):
+  	for dc in range(100, -1, -5):
   		p.ChangeDutyCycle(dc)
   		time.sleep(0.05)
 except KeyboardInterrupt:
