@@ -14,10 +14,10 @@ try:
   while True:
   	for dc in range(0, 50, 5):
   		p.ChangeDutyCycle(dc)
-  		time.sleep(0.01)
+  		time.sleep(0.05)
   	for dc in range(50, -1, -5):
   		p.ChangeDutyCycle(dc)
-  		time.sleep(0.01)
+  		time.sleep(0.05)
 except KeyboardInterrupt:
   p.stop()
   GPIO.cleanup()
