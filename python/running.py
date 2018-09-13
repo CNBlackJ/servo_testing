@@ -23,13 +23,13 @@ try:
   while True:
     # p.ChangeDutyCycle(7.5)  # turn towards 90 degree
     # time.sleep(1) # sleep 1 second
-    p1.ChangeDutyCycle(8.5)  # turn towards 0 degree
-    p2.ChangeDutyCycle(8.5)
-    p3.ChangeDutyCycle(8.5)
+    p1.ChangeDutyCycle(7.5)  # turn towards 0 degree
+    p2.ChangeDutyCycle(7.5)
+    p3.ChangeDutyCycle(7.5)
     time.sleep(0.5) # sleep 1 second
-    p1.ChangeDutyCycle(4.5) # turn towards 180 degree
-    p2.ChangeDutyCycle(4.5)
-    p3.ChangeDutyCycle(4.5)
+    p1.ChangeDutyCycle(2.5) # turn towards 180 degree
+    p2.ChangeDutyCycle(2.5)
+    p3.ChangeDutyCycle(2.5)
     time.sleep(0.5) # sleep 1 second 
 except KeyboardInterrupt:
   p.stop()
