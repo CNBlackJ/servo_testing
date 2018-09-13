@@ -21,8 +21,8 @@ p1.start(0) # Initialization
 p2.start(0)
 p3.start(0)
 
-minAngle = sys.argv[1] ? sys.argv[1] : 40
-maxAngle = sys.argv[2] ? sys.argv[2] : 90
+minAngle = sys.argv[1] if sys.argv[1] else 40
+maxAngle = sys.argv[2] if sys.argv[2] else 90
 
 minDc = (45 + minAngle) / 18
 maxDc = (45 + maxAngle) / 18
