@@ -13,9 +13,9 @@ GPIO.setup(servoPIN1, GPIO.OUT)
 GPIO.setup(servoPIN2, GPIO.OUT)
 GPIO.setup(servoPIN3, GPIO.OUT)
 
-p1 = GPIO.PWM(servoPIN, 50) # GPIO 17 for PWM with 50Hz
-p2 = GPIO.PWM(servoPIN, 50)
-p3 = GPIO.PWM(servoPIN, 50)
+p1 = GPIO.PWM(servoPIN1, 50) # GPIO 17 for PWM with 50Hz
+p2 = GPIO.PWM(servoPIN2, 50)
+p3 = GPIO.PWM(servoPIN3, 50)
 p1.start(0) # Initialization
 p2.start(0)
 p3.start(0)
