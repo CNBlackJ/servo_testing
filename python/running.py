@@ -66,9 +66,11 @@ if __name__ == '__main__':
     if ch=='d':
       print 'drop'
       drop()
+      GPIO.cleanup() # cleanup all GPIO
     elif ch=='r':
       print 'reset'
       reset()
+      GPIO.cleanup() # cleanup all GPIO
     elif ch=='q':
       print 'shutdown'
       break
