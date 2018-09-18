@@ -28,30 +28,6 @@ maxAngle = sys.argv[2] if sys.argv[2] else 90
 minDc = (45 + int(minAngle)) / 18
 maxDc = (45 + int(maxAngle)) / 18
 
-if __name__ == '__main__':
-  print "Reading from keybord..."
-  print "d: drop; r: reset; q to qiut;"
-  while True:
-    fd=sys.stdin.fileno()
-    old_settings=termios.tcgetattr(fd)
-    try:
-      tty.setraw(fd)
-      ch=sys.stdin.read(1)
-    finally:
-      termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    if ch=='d':
-      print 'drop'
-      drop()
-    elif ch=='r':
-      print 'reset'
-      reset()
-    elif ch=='q':
-      print 'shutdown'
-      break
-    elif ord(ch)==0x3:
-      print "shutdown"
-      break
-
 def drop():
   try:
     p1.ChangeDutyCycle(maxDc)
@@ -75,3 +51,27 @@ def reset():
   finally:
     print("clean up")
     GPIO.cleanup() # cleanup all GPIO
+
+if __name__ == '__main__':
+  print "Reading from keybord..."
+  print "d: drop; r: reset; q to qiut;"
+  while True:
+    fd=sys.stdin.fileno()
+    old_settings=termios.tcgetattr(fd)
+    try:
+      tty.setraw(fd)
+      ch=sys.stdin.read(1)
+    finally:
+      termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    if ch=='d':
+      print 'drop'
+      drop()
+    elif ch=='r':
+      print 'reset'
+      reset()
+    elif ch=='q':
+      print 'shutdown'
+      break
+    elif ord(ch)==0x3:
+      print "shutdown"
+      break
