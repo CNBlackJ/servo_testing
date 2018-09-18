@@ -4,6 +4,7 @@
 import RPi.GPIO as GPIO
 import time
 import sys
+import tty, termios
 
 servoPIN1 = 17
 servoPIN2 = 27
@@ -27,21 +28,50 @@ maxAngle = sys.argv[2] if sys.argv[2] else 90
 minDc = (45 + int(minAngle)) / 18
 maxDc = (45 + int(maxAngle)) / 18
 
-try:
+if __name__ == '__main__':
+  print "Reading from keybord..."
+  print "d: drop; r: reset; q to qiut;"
   while True:
-    # p.ChangeDutyCycle(7.5)  # turn towards 90 degree
-    # time.sleep(1) # sleep 1 second
+    fd=sys.stdin.fileno()
+    old_settings=termios.tcgetattr(fd)
+    try:
+      tty.setraw(fd)
+      ch=sys.stdin.read(1)
+    finally:
+      termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    if ch=='d':
+      print 'drop'
+      drop()
+    elif ch=='r':
+      print 'reset'
+      reset()
+    elif ch=='q':
+      print 'shutdown'
+      break
+    elif ord(ch)==0x3:
+      print "shutdown"
+      break
+
+def drop():
+  try:
     p1.ChangeDutyCycle(maxDc)
     p2.ChangeDutyCycle(maxDc)
     p3.ChangeDutyCycle(maxDc)
-    time.sleep(0.5) # sleep 1 second
+    time.sleep(0.5) # sleep 0.5 second
     p1.ChangeDutyCycle(minDc)
     p2.ChangeDutyCycle(minDc)
     p3.ChangeDutyCycle(minDc)
-    time.sleep(0.5) # sleep 1 second 
-except KeyboardInterrupt:
-  p.stop()
-  GPIO.cleanup()
-finally:
-   print("clean up") 
-   GPIO.cleanup() # cleanup all GPIO 
+    time.sleep(0.5) # sleep 0.5 second 
+  finally:
+    print("clean up")
+    GPIO.cleanup() # cleanup all GPIO
+
+def reset():
+  try:
+    p1.ChangeDutyCycle(90)
+    p2.ChangeDutyCycle(90)
+    p3.ChangeDutyCycle(90)
+    time.sleep(0.5) # sleep 0.5 second
+  finally:
+    print("clean up")
+    GPIO.cleanup() # cleanup all GPIO
